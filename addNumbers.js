@@ -1,31 +1,28 @@
 var readline = require('readline');
 
 var reader = readline.createInterface({
-
   input: process.stdin,
-  output: process.stdout;
+  output: process.stdout
 });
 
-reader.question("Query", function(answer) {
-  console.log("Hello" + answer + "!");
-});
 
-function addNumbers(sum, numsLeft, completionCallback) {
+function addNumbers(theSumArg, numsLeft, onlyDoThisWhenCalled) {
   if (numsLeft > 0) {
     reader.question("Add next number", function(num) {
       var num = parseInt(num);
-      var currentSum = num + sum;
+      var currentSum = theSumArg + num;
 
-      completionCallback(currentSum);
+      console.log("partial sum: " + currentSum);
 
-      addNumbers(currentSum, (numsLeft--), completionCallback)
+      addNumbers(currentSum, (--numsLeft), onlyDoThisWhenCalled);
     });
   } else {
-    completionCallback(sum)
+    onlyDoThisWhenCalled(theSumArg);
+    reader.close();
   }
 }
 
-completionCallback(function(sum){
-  console.log("Current sum : " + sum);
-})
-// reader.close();
+
+addNumbers(0, 4, function(passedInFromTheSumArg) {
+  console.log("TOTAL SUM: " + passedInFromTheSumArg);
+});
