@@ -37,5 +37,21 @@ function performSortPass(arr, i, madeAnySwaps, callback){
 
 };
 
+function crazyBubbleSort(arr, sortCompletionCallback){
 
-performSortPass([5,4,3,2,1], 0, false, "callback")
+  // does sortPassCallback need an argument in if?
+  var sortPassCallback = function(shouldMakePass) {
+    if (shouldMakePass) {
+      performSortPass(arr, 0, false, sortPassCallback);
+    } else {
+      sortCompletionCallback(arr);
+    };
+  };
+
+  sortPassCallback(true);
+};
+
+crazyBubbleSort([3, 2, 1], function (arr) { console.log(arr) });
+
+
+// performSortPass([5,4,3,2,1], 0, false, "callback")
