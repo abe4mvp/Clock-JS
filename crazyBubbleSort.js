@@ -20,8 +20,9 @@ function askLessThan(el1, el2, callback){
 
 
 // where do we set madeAnySwaps to false?
-function performSortPass(arr, i, madeAnySwaps, callback){
+function performSortPass(arr, i, madeAnySwaps, sortPassCallback){
   if (i < arr.length -1){
+    console.log(arr);
     askLessThan(arr[i], arr[i+1], function(lessThan){
       if (lessThan){
         var tmp = arr[i];
@@ -29,10 +30,10 @@ function performSortPass(arr, i, madeAnySwaps, callback){
         arr[i+1] = tmp;
         madeAnySwaps = true;
       }
-      performSortPass(arr, ++i, madeAnySwaps, callback)
+      performSortPass(arr, ++i, madeAnySwaps, sortPassCallback)
     })
   } else {
-    callback(madeAnySwaps);
+    sortPassCallback(madeAnySwaps);
   };
 
 };
@@ -45,6 +46,8 @@ function crazyBubbleSort(arr, sortCompletionCallback){
       performSortPass(arr, 0, false, sortPassCallback);
     } else {
       sortCompletionCallback(arr);
+      console.log("You sorted the array");
+      reader.close();
     };
   };
 

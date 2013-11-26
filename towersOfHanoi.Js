@@ -56,7 +56,7 @@
       if (self.board.validMove(userFrom, userTo)){
         self.board.movePiece(userFrom, userTo);
 
-        if (self.board.towers[userTo].length === 5) {
+        if (userTo !== 0 && self.board.towers[userTo].length === 5) {
           // game over
           console.log("you win!")
           reader.close();
