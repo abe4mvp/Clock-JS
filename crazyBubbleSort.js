@@ -16,4 +16,26 @@ function askLessThan(el1, el2, callback){
       callback(false);
     }
   });
-}
+};
+
+
+// where do we set madeAnySwaps to false?
+function performSortPass(arr, i, madeAnySwaps, callback){
+  if (i < arr.length -1){
+    askLessThan(arr[i], arr[i+1], function(lessThan){
+      if (lessThan){
+        var tmp = arr[i];
+        arr[i] = arr[i+1];
+        arr[i+1] = tmp;
+        madeAnySwaps = true;
+      }
+      performSortPass(arr, ++i, madeAnySwaps, callback)
+    })
+  } else {
+    callback(madeAnySwaps);
+  };
+
+};
+
+
+performSortPass([5,4,3,2,1], 0, false, "callback")
