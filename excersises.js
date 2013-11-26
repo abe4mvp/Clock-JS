@@ -1,4 +1,4 @@
-// var date = new Date();
+
 
 var Clock = function() {
 }
@@ -16,7 +16,6 @@ Clock.prototype.setStartTime = function(){
 Clock.prototype.showTime = function(){
   this.updateTime();
 
-  // update time
   return this.hours + ":" + this.minutes + ":" + this.seconds;
 }
 
@@ -49,8 +48,5 @@ Clock.prototype.run = function(){
 
 clock.run();
 
-setInterval(function () {
-  console.log("http://en.wikipedia.org/wiki/Out_of_Time_(2003_film)");
-}, 500);
 
 
